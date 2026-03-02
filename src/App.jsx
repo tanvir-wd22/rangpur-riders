@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import AvailablePlayers from './components/AvailablePlayers';
 import SelectedPlayers from './components/SelectedPlayers';
 import Loading from './components/Loading';
+import Tabs from './components/Tabs';
 
 const fetchPlayers = async () => {
   const res = await fetch('/fakeData.json');
@@ -20,27 +21,17 @@ function App() {
 
   return (
     <>
-      <nav>
+      <nav className="mb-6">
         <Navbar balance={balance}></Navbar>
       </nav>
 
       <main className="w-11/12 mx-auto">
-        <section className="flex justify-between items-center my-6">
-          <h1 className="text-2xl font-semibold">Available Players</h1>
-          <div className="flex">
-            <button
-              onClick={() => setToggleTab(true)}
-              className={` px-4 py-2 border-2 border-gray-400 border-r-0 rounded-l-2xl ${toggleTab === true ? 'bg-green-200' : 'bg-white'} `}
-            >
-              Available
-            </button>
-            <button
-              onClick={() => setToggleTab(false)}
-              className={` px-4 py-2 border-2 border-gray-400 border-l-0 rounded-r-2xl ${toggleTab === false ? 'bg-green-200' : 'bg-white'}`}
-            >
-              Selected({pickedPlayers.length})
-            </button>
-          </div>
+        <section className="mb-6">
+          <Tabs
+            toggleTab={toggleTab}
+            setToggleTab={setToggleTab}
+            pickedPlayers={pickedPlayers}
+          ></Tabs>
         </section>
 
         <section className="mb-6">
