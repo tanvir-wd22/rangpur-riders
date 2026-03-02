@@ -1,6 +1,6 @@
 import { MdDeleteForever } from 'react-icons/md';
 
-const SmallCard = ({ singlePlayer }) => {
+const SmallCard = ({ singlePlayer, removePickedPlayer }) => {
   // console.log(singlePlayer);
   const { image, name, role } = singlePlayer;
   return (
@@ -16,7 +16,10 @@ const SmallCard = ({ singlePlayer }) => {
           </div>
         </div>
         <div>
-          <button className="btn btn-error">
+          <button
+            onClick={() => removePickedPlayer(singlePlayer)}
+            className="btn btn-error"
+          >
             <MdDeleteForever size={25}></MdDeleteForever>
           </button>
         </div>

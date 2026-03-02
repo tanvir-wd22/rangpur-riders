@@ -18,6 +18,8 @@ const BigCard = ({
     if (balance < singlePlayer.price) {
       toast.error('Not enough coins');
       return;
+    } else {
+      toast.success('player picked successfully');
     }
     setIsSelected(true);
     setBalance(balance - singlePlayer.price);

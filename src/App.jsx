@@ -4,6 +4,7 @@ import AvailablePlayers from './components/AvailablePlayers';
 import SelectedPlayers from './components/SelectedPlayers';
 import Loading from './components/Loading';
 import Tabs from './components/Tabs';
+import { toast } from 'react-toastify';
 
 const fetchPlayers = async () => {
   const res = await fetch('/fakeData.json');
@@ -18,6 +19,15 @@ function App() {
   const [pickedPlayers, setPickedPlayers] = useState([]);
   // console.log(pickedPlayers);
   // console.log(pickedPlayers.length);
+  const removePickedPlayer = (singlePlayer) => {
+    // console.log(singlePlayer);
+    const remainingPickedPlayer = pickedPlayers.filter(
+      (onePlayer) => onePlayer.id !== singlePlayer.id
+    );
+    setPickedPlayers(remainingPickedPlayer);
+    setBalance(balance + singlePlayer.price);
+    toast.warning('player removed done');
+  };
 
   return (
     <>
@@ -46,7 +56,10 @@ function App() {
               ></AvailablePlayers>
             </Suspense>
           ) : (
-            <SelectedPlayers pickedPlayers={pickedPlayers}></SelectedPlayers>
+            <SelectedPlayers
+              pickedPlayers={pickedPlayers}
+              removePickedPlayer={removePickedPlayer}
+            ></SelectedPlayers>
           )}
         </section>
       </main>

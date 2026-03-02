@@ -8,7 +8,7 @@ const Navbar = ({ balance }) => {
           <img src={logo} className="w-12"></img>
         </div>
         <div className="flex-none">
-          <button className="btn btn-success">
+          <button className="btn btn-info text-lg font-semibold">
             <span>{balance}</span>
             <span>Coins</span>
           </button>
