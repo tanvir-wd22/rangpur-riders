@@ -1,13 +1,31 @@
 import user from '../assets/user.png';
 import flag from '../assets/flag.png';
-const BigCard = ({ singlePlayer }) => {
-  const { id, image, name, role, country, battingHand, bowlingHand, price } =
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+
+const BigCard = ({ singlePlayer, setBalance, balance }) => {
+  const [isSelected, setIsSelected] = useState(false);
+  const { image, name, role, country, battingHand, bowlingHand, price } =
     singlePlayer;
+
+  const handlePlayerClick = (singlePlayer) => {
+    if (balance < singlePlayer.price) {
+      toast.error('Not enough coins');
+      return;
+    }
+    setIsSelected(true);
+    setBalance(balance - singlePlayer.price);
+  };
+
   return (
     <div>
       <div className="card bg-base-100 shadow-sm">
         <figure>
-          <img src={image} className="w-full h-64 px-6 pt-6" alt="player" />
+          <img
+            src={image}
+            className="w-full h-64 object-cover px-6 pt-6"
+            alt="player"
+          />
         </figure>
         <div className="card-body">
           <div className="flex items-center gap-2">
@@ -27,7 +45,13 @@ const BigCard = ({ singlePlayer }) => {
           </div>
           <div className="card-actions items-center justify-between">
             <p>Price : {price} $</p>
-            <button className="btn btn-soft btn-sm">Choose Player</button>
+            <button
+              onClick={() => handlePlayerClick(singlePlayer)}
+              disabled={isSelected === true}
+              className="btn btn-soft btn-sm"
+            >
+              {isSelected === true ? 'Selected Player' : 'Choose Player'}
+            </button>
           </div>
         </div>
       </div>
