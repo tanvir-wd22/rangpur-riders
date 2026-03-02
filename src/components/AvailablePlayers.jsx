@@ -1,7 +1,7 @@
 import { use } from 'react';
 import BigCard from './BigCard';
 
-const AvailablePlayers = ({ playersPromise, balance, setBalance }) => {
+const AvailablePlayers = ({ playersPromise, balance, setBalance, pickedPlayers, setPickedPlayers }) => {
   //   console.log(playersPromise);
   const playersData = use(playersPromise);
   //   console.log(playersData);
@@ -13,6 +13,8 @@ const AvailablePlayers = ({ playersPromise, balance, setBalance }) => {
           key={singlePlayer.id}
           balance={balance}
           setBalance={setBalance}
+          pickedPlayers={pickedPlayers}
+          setPickedPlayers={setPickedPlayers}
         ></BigCard>
       ))}
     </div>

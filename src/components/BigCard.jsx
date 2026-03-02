@@ -3,7 +3,13 @@ import flag from '../assets/flag.png';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-const BigCard = ({ singlePlayer, setBalance, balance }) => {
+const BigCard = ({
+  singlePlayer,
+  setBalance,
+  balance,
+  pickedPlayers,
+  setPickedPlayers,
+}) => {
   const [isSelected, setIsSelected] = useState(false);
   const { image, name, role, country, battingHand, bowlingHand, price } =
     singlePlayer;
@@ -15,6 +21,7 @@ const BigCard = ({ singlePlayer, setBalance, balance }) => {
     }
     setIsSelected(true);
     setBalance(balance - singlePlayer.price);
+    setPickedPlayers([...pickedPlayers, singlePlayer]);
   };
 
   return (

@@ -13,7 +13,10 @@ const playersPromise = fetchPlayers();
 
 function App() {
   const [toggleTab, setToggleTab] = useState(true);
-  const [balance, setBalance] = useState(1111111);
+  const [balance, setBalance] = useState(3333333);
+  const [pickedPlayers, setPickedPlayers] = useState([]);
+  // console.log(pickedPlayers);
+  // console.log(pickedPlayers.length);
 
   return (
     <>
@@ -35,22 +38,24 @@ function App() {
               onClick={() => setToggleTab(false)}
               className={` px-4 py-2 border-2 border-gray-400 border-l-0 rounded-r-2xl ${toggleTab === false ? 'bg-green-200' : 'bg-white'}`}
             >
-              Selected
+              Selected({pickedPlayers.length})
             </button>
           </div>
         </section>
 
-        <section>
+        <section className="mb-6">
           {toggleTab === true ? (
             <Suspense fallback={<Loading />}>
               <AvailablePlayers
                 playersPromise={playersPromise}
                 balance={balance}
                 setBalance={setBalance}
+                pickedPlayers={pickedPlayers}
+                setPickedPlayers={setPickedPlayers}
               ></AvailablePlayers>
             </Suspense>
           ) : (
-            <SelectedPlayers></SelectedPlayers>
+            <SelectedPlayers pickedPlayers={pickedPlayers}></SelectedPlayers>
           )}
         </section>
       </main>
